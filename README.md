@@ -1,2 +1,2 @@
 # java_selenium
-Java + Selenium Training
+Java Selenium Training
