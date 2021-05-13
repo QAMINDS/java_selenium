@@ -4,9 +4,12 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class WebDriverFactory {
@@ -20,7 +23,16 @@ public class WebDriverFactory {
         FIREFOX
     }
 
+    private static Map<BrowserName, Runnable> driverMap = new HashMap<BrowserName, Runnable>();
+
+//    private static void addDrivers() {
+//        driverMap.put()
+//
+//    }
+
+
     public static WebDriver getDriver(BrowserName name) {
+
         WebDriver driver = null;
         if (name == BrowserName.CHROME) {
             driver = getChromeDriver();
@@ -58,6 +70,16 @@ public class WebDriverFactory {
     }
 
     private static WebDriver getChromeDriver() {
+        logger.debug("Get chrome driver..");
+        File driversDir = getDriversPath();
+        File chromeFile = new File(driversDir, "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", chromeFile.getPath());
+        ChromeOptions options = new ChromeOptions();
+//        options.addArguments();
+        return new ChromeDriver(options);
+    }
+
+    private static WebDriver getChromeDriverx() {
         logger.debug("Get chrome driver..");
         File driversDir = getDriversPath();
         File chromeFile = new File(driversDir, "chromedriver.exe");
