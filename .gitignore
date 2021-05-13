@@ -1,6 +1,10 @@
 # Compiled class file
 .idea
 
+target
+
+javaselenium.iml
+
 *.class
 
 # Log file
