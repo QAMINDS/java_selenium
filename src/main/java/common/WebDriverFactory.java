@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class WebDriverFactory {
 
     private final static Logger logger = Logger.getLogger(WebDriverFactory.class);
 
-    private final static File rootDriversDir = new File("src/main/resources/drivers");
+    private final static File rootDriversDir = new File("/src/main/resources/drivers");
 
     public enum BrowserName {
         CHROME,
@@ -52,7 +53,7 @@ public class WebDriverFactory {
     private static WebDriver getFirefoxDriver() {
         logger.debug("Get firefox driver...");
         File driversDir = getDriversPath();
-        File geckoFile = new File(driversDir, "geckodriver.exe");
+        File geckoFile = new File(driversDir, "geckodriver");
         System.setProperty("webdriver.gecko.driver", geckoFile.getPath());
         return new FirefoxDriver();
     }
@@ -60,8 +61,11 @@ public class WebDriverFactory {
     private static WebDriver getChromeDriver() {
         logger.debug("Get chrome driver..");
         File driversDir = getDriversPath();
-        File chromeFile = new File(driversDir, "chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", chromeFile.getPath());
+        File chromeFile = new File(driversDir, "chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "./"+chromeFile.getPath());
+        System.setProperty("webdriver.chrome.driver","./src/main/resources/mac/chromedriver");
+       //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("start-maximized");
         return new ChromeDriver();
     }
 }
