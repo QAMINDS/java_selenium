@@ -13,7 +13,7 @@ public class WebDriverFactory {
 
     private final static Logger logger = Logger.getLogger(WebDriverFactory.class);
 
-    private final static File rootDriversDir = new File("src/main/resources/drivers");
+    private final static File rootDriversDir = new File("java_selenium/src/main/resources/drivers");
 
     public enum BrowserName {
         CHROME,
