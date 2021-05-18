@@ -10,8 +10,8 @@ public class SeleniumHandsOn5 {
     public static void main(String[] args) throws InterruptedException {
 
         final String facebookURL = "https://www.facebook.com/";
-        final String email = "desechable0927@outlook.com";
-        final String pwd = "pffduhugh!";
+        final String email = "";
+        final String pwd = "";
 
         WebDriver driver = WebDriverFactory.getDriver(WebDriverFactory.BrowserName.CHROME);
 
