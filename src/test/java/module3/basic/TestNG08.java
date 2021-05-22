@@ -8,15 +8,19 @@ Test Data Provider
  */
 public class TestNG08 {
 
-    @DataProvider(name = "testDataProvider")
+    @DataProvider(name = "my custom name")
     public Object[][]  testDataProvider() {
         return new Object [][] {
-                {"First Value"}, {"Second Value"}
+                {"User 1", "Password 1", 10},
+                {"User 2", "Password 2", 10},
+                {"User 3", "Password 3", 10}
         };
     }
 
-    @Test(description = "My Test Case Description", dataProvider = "testDataProvider")
-    public void testPass(String myArg) throws InterruptedException {
-        System.out.println(myArg);
+    @Test(description = "My Test Case Description", dataProvider = "my custom name")
+    public void testPass(String user, String password, int total) {
+        System.out.println(user);
+        System.out.println(password);
+        System.out.println(total);
     }
 }

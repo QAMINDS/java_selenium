@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 Test Priority
  */
 public class TestNG04 {
-    @Test(description = "My Test Case Description", priority = 3)
+    @Test(description = "My Test Case Description", priority = 1)
     public void testPass() {
         Assert.assertTrue(5==5);
     }
