@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Hello World" verbose="1" parallel="methods" thread-count="10">
+    <parameter name="user" value="test"/>
+    <parameter name="password" value="test123"/>
+    <parameter name="browser" value="chrome"/>
+    <test name="sanity">
+        <classes>
+            <class name="module3.selenium.TestGoogle"/>
+        </classes>
+    </test>
+</suite>
