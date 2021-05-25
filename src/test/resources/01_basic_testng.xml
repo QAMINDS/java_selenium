@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My Suite" verbose="1" parallel="classes" thread-count="10">
+    <groups>
+        <run>
+            <include name="sanity"></include>
+        </run>
+    </groups>
+    <test name="My Test">
+        <classes>
+            <class name="modulo3.Exercise1"></class>
+
+        </classes>
+    </test>
+</suite>
