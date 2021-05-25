@@ -1,25 +1,20 @@
 package module3;
 
-import common.WebDriverFactory;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import common.BaseTest;
 
-public class TestNGexercise1 {
+public class TestNGexercise1 extends BaseTest {
 
-    @Test
+    @Test (groups = {"sanity"})
     public void testGoogleNavigate() {
 
-        WebDriver driver = WebDriverFactory.getDriver(WebDriverFactory.BrowserName.CHROME);
-
         final String googleURL = "https://www.google.com.mx/";
-        driver.get(googleURL);
+        this.getDriver().get(googleURL);
 
-        String currentURL = driver.getCurrentUrl();
+        String currentURL = this.getDriver().getCurrentUrl();
 
         Assert.assertEquals(currentURL, googleURL, "Wrong URL");
-
-        driver.close();
 
     }
 }
