@@ -1,5 +1,7 @@
 package module1.toyroblems.wednesday;
 
+import org.testng.annotations.Test;
+
 public class FizzBuzz {
 
     public static void main(String[] args){
@@ -17,5 +19,9 @@ public class FizzBuzz {
                 System.out.println(k);
             }
         }
+    }
+
+    @Test
+    void x() {
     }
 }
