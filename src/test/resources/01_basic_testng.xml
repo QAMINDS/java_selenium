@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="My Suite" verbose="1" parallel="classes" thread-count="10">
+<suite name="My Suite" verbose="1" parallel="methods" thread-count="10">
     <groups>
         <run>
             <include name="sanity"/>
@@ -8,6 +8,7 @@
     <test name="My Test">
         <classes>
             <class name="module3.TestNGexercise1"/>
+            <class name="module3.TestNGexercise2"/>
         </classes>
     </test>
 </suite>
