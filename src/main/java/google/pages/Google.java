@@ -2,12 +2,14 @@ package google.pages;
 
 import common.BasePage;
 import google.elements.GoogleElements;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class Google extends BasePage {
-    private GoogleElements elements;
-    public Google(WebDriver driver, String url, int timeout) {
-        super(driver, url, timeout);
+    public GoogleElements elements;
+
+    public Google(WebDriver driver, int timeout, String url) {
+        super(driver, timeout, url);
         this.elements = new GoogleElements(driver, timeout);
     }
 
@@ -17,9 +19,15 @@ public class Google extends BasePage {
         this.elements.getFeelingLuckyButton();
     }
 
-    public GoogleResults search(String topic) {
+    public void search(String topic) {
         this.elements.getSearchBox().sendKeys(topic);
+        this.elements.getSearchBox().sendKeys(Keys.TAB);
         this.elements.getSearchButton().click();
-        return new GoogleResults(this.getDriver(), this.getUrl() + "/webhp", this.getTimeout());
+    }
+
+    public void searchFeelingLucky(String topic) {
+        this.elements.getFeelingLuckyButton().sendKeys(topic);
+        this.elements.getFeelingLuckyButton().sendKeys(Keys.TAB);
+        this.elements.getFeelingLuckyButton().click();
     }
 }

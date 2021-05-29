@@ -5,12 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class GoogleResultsElements extends BaseElement {
-    public final static By SEARCH_BOX = By.name("q");
+public class SearchResultsElements extends BaseElement {
+    private final static By SEARCH_BOX = By.name("q");
 
-    public final static By SEARCH_RESULTS_CONTAINER = By.id("search");
+    private final static By SEARCH_RESULTS_CONTAINER = By.id("search");
 
-    public GoogleResultsElements(WebDriver driver, int timeout) {
+    private final static By SEARCH_BTN = By.xpath("//button[@type='submit']");
+
+    public SearchResultsElements(WebDriver driver, int timeout) {
         super(driver, timeout);
     }
 
@@ -21,4 +23,6 @@ public class GoogleResultsElements extends BaseElement {
     public WebElement getResultsContainer() {
         return this.waitUntilClickable(SEARCH_RESULTS_CONTAINER);
     }
+
+    public WebElement getSearchBtn() {return this.waitUntilClickable(SEARCH_BTN);}
 }

@@ -23,8 +23,13 @@ public class TestNG09 {
         System.out.println("Before Method");
     }
 
-    @Test
+    @Test()
     public void test() {
+        System.out.println("TEST");
+    }
+
+    @Test
+    public void test1() {
         System.out.println("TEST");
     }
 

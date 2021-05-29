@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class GoogleElements extends BaseElement {
-    public final static By SEARCH_BOX = By.name("q");
+    private final static By SEARCH_BOX = By.name("q");
 
-    public final static By SEARCH_BTN = By.xpath("//*[@name='btnK' and not(ancestor::div[contains(@style,'display:none')])]");
+    private final static By SEARCH_BTN = By.xpath("//*[@name='btnK' and not(ancestor::div[@jsname])]");
 
-    public final static By LUCKY_BTN = By.xpath("//*[@name='btnI' and not(ancestor::div[contains(@style,'display:none')])]");
+    private final static By LUCKY_BTN = By.xpath("//*[@name='btnI' and not(ancestor::div[@jsname])]");
 
     public GoogleElements(WebDriver driver, int timeout) {
         super(driver, timeout);

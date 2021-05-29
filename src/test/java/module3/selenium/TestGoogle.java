@@ -2,7 +2,7 @@ package module3.selenium;
 
 import common.BaseTestMultiThread;
 import google.pages.Google;
-import google.pages.GoogleResults;
+import google.pages.SearchResults;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,18 +14,16 @@ public class TestGoogle extends BaseTestMultiThread {
     public Object[][] dataProvider() {
         return new Object [][] {
                 {"Selenium"},
-                {"Java"},
-                {"TestNG"},
-                {"QA Minds"}
+                //{"Java"},
+                //{"TestNG"},
+                //{"QA Minds"}
         };
     }
 
     @Test(dataProvider = "dataProvider")
     public void testSearchGoogle(String topic) {
-        Google google = new Google(this.getDriver(), URL, TIMEOUT);
+        Google google = new Google(this.getDriver(), TIMEOUT, URL);
         google.open();
         google.waitUntilLoaded();
-        GoogleResults results = google.search(topic);
-        results.waitUntilLoaded();
     }
 }

@@ -3,63 +3,60 @@ package common;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTestMultiThread {
-    private final static Map<String, WebDriver> DRIVERS = new HashMap<>();
+    private Map<String, WebDriver> drivers;
     protected String user;
     protected String password;
     protected WebDriverFactory.BrowserName browser;
 
-    @BeforeClass
-    @Parameters({"user", "password",  "browser", })
-    public void beforeClass(String user, String password, String browser) {
+    @BeforeClass(alwaysRun = true)
+    //@Parameters({"user", "password",  "browser", })
+    public synchronized void beforeClass() {
         this.user = user;
         this.password = password;
-        this.browser = WebDriverFactory.BrowserName.valueOf(browser.toUpperCase());
+        this.browser = WebDriverFactory.BrowserName.CHROME;
+        this.drivers = new ConcurrentHashMap<>();
     }
 
-    @BeforeMethod
-    public void beforeMethod(Method method, ITestResult testResult) {
+    @BeforeMethod(alwaysRun = true)
+    public synchronized void beforeMethod(Method method, ITestResult testResult) {
         WebDriver driver = WebDriverFactory.getDriver(this.browser);
-        DRIVERS.put(method.getName(), driver);
+        this.drivers.put(method.getName(), driver);
     }
 
-    @AfterMethod
-    public void afterMethod(Method method, ITestResult testResult) {
-        WebDriver driver = DRIVERS.getOrDefault(method.getName(), null);
+    @AfterMethod(alwaysRun = true)
+    public synchronized void afterMethod(Method method, ITestResult testResult) {
+        WebDriver driver = this.drivers.getOrDefault(method.getName(), null);
         if (driver != null) {
+            this.drivers.remove(method.getName());
             driver.quit();
         }
     }
 
-    public WebDriver getDriver() {
-        Method caller = this.getCallerMethod();
-        return DRIVERS.getOrDefault(caller.getName(), null);
+    public synchronized WebDriver getDriver() {
+        Method caller = this.getCallerTestMethod();
+        return this.drivers.getOrDefault(caller.getName(), null);
     }
 
-    public void setDriver(WebDriver driver) {
-        Method caller = this.getCallerMethod();
-        DRIVERS.put(caller.getName(), driver);
-    }
-
-    private synchronized Method getCallerMethod() {
+    private synchronized Method getCallerTestMethod() {
         try {
-            for (StackTraceElement stElement: Thread.currentThread().getStackTrace()) {
-                String methodName = stElement.getMethodName();
-                Class<?> kls = Class.forName(stElement.getClassName());
-                for (Method method : kls.getMethods()) {
-                    if (method.getName().equals(methodName) && method.getAnnotation(Test.class) != null) {
-                        return method;
-                    }
+            for (StackTraceElement stackElement: Thread.currentThread().getStackTrace()) {
+                String mName = stackElement.getMethodName();
+                Class cKls = Class.forName(stackElement.getClassName());
+                Method[] mts = cKls.getMethods();
+                Method method = Arrays.stream(mts).filter(m -> mName.equals(m.getName())).findFirst().orElse(null);
+                if (method != null && method.getAnnotation(Test.class) != null) {
+                    return method;
                 }
             }
-            throw new RuntimeException("Get reporter was called outside a test method: %s");
+            throw new RuntimeException("Get caller was executed outside a test method: %s");
         } catch(Exception exception) {
-            throw new RuntimeException(String.format("Get reporter was called outside a test method: %s", exception));
+            throw new RuntimeException(String.format("Get caller was executed outside a test method: %s", exception));
         }
     }
 
