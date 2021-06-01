@@ -2,13 +2,14 @@
 <suite name="My Suite" verbose="1" parallel="methods" thread-count="10">
     <groups>
         <run>
+            <include name="product"/>
             <include name="sanity"/>
         </run>
     </groups>
     <test name="My Test">
         <classes>
-            <class name="module3.TestNGexercise1"/>
-            <class name="module3.TestNGexercise2"/>
+            <class name="module4.TestLogin"/>
+            <class name="module4.TestProducts"/>
         </classes>
     </test>
 </suite>
