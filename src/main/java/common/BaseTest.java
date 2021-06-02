@@ -11,7 +11,7 @@ public class BaseTest {
     private String password;
     private WebDriverFactory.BrowserName browser;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     //@Parameters({"user", "password",  "browser", })
     public void beforeClass() {
         //this.user = user;
@@ -20,7 +20,7 @@ public class BaseTest {
         this.driver = WebDriverFactory.getDriver(this.browser);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
         if (this.driver != null) {
             this.driver.quit();
