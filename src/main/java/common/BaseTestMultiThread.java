@@ -11,14 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTestMultiThread {
     private Map<String, WebDriver> drivers;
-    protected String user;
+    protected String username;
     protected String password;
     protected WebDriverFactory.BrowserName browser;
 
     @BeforeClass(alwaysRun=true)
     //@Parameters({"user", "password",  "browser", })
     public synchronized void beforeClass() {
-        this.user = user;
+        this.username = username;
         this.password = password;
         this.browser = WebDriverFactory.BrowserName.CHROME;
         this.drivers = new ConcurrentHashMap<>();

@@ -29,7 +29,7 @@ public class BasePage {
     }
 
     public void close() {
-        logger.info("Close: " + this.url);
+        logger.info("Close: " + this.url + "\n");
         this.driver.close();
     }
 
@@ -47,5 +47,10 @@ public class BasePage {
 
     public int getTimeout() {
         return timeout;
+    }
+
+    public String getCurrentUrl() {
+        String currentURL = this.driver.getCurrentUrl();
+        return currentURL;
     }
 }

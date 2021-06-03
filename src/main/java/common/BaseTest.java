@@ -6,14 +6,14 @@ import org.testng.annotations.*;
 
 public class BaseTest {
     private WebDriver driver;
-    private String user;
+    private String username;
     private String password;
     private WebDriverFactory.BrowserName browser;
 
     @BeforeClass (alwaysRun=true)
-    //@Parameters({"user", "password",  "browser", })
+    //@Parameters({"username", "password",  "browser", })
     public void beforeClass() {
-        //this.user = user;
+        //this.username = username;
         //this.password = password;
         this.browser = WebDriverFactory.BrowserName.CHROME;
         this.driver = WebDriverFactory.getDriver(this.browser);
@@ -31,7 +31,7 @@ public class BaseTest {
     }
 
     public String getUser() {
-        return user;
+        return username;
     }
 
     public WebDriverFactory.BrowserName getBrowser() {
