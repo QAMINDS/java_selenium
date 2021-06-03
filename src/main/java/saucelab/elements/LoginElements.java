@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LoginElements extends BaseElement {
 
-    private final static By LOGIN_BOX = By.id("user-name");
+    private final static By USERNAME_BOX = By.id("user-name");
 
     private final static By PSW_BOX = By.id("password");
 
@@ -22,7 +22,7 @@ public class LoginElements extends BaseElement {
     }
 
     public WebElement getUserName() {
-        return this.waitUntilClickable(LOGIN_BOX);
+        return this.waitUntilClickable(USERNAME_BOX);
     }
 
     public WebElement getPassword() {
