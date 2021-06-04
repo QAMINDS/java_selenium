@@ -6,10 +6,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import saucelab.pages.SauceLogin;
 import saucelab.pages.SauceProducts;
+import saucelab.pages.Saucelabs;
+import twitter.pages.TwitterSaucelabs;
 
 public class TestProducts extends BaseTestMultiThread {
 
     private static final String URL = "https://www.saucedemo.com/";
+    private static final String SAUCE_URL = "https://saucelabs.com/";
+    private static final String TWTTER_URL = "https://twitter.com/saucelabs";
+    private static final String PRODUCTS_TITLE = "PRODUCTS";
     private static final int TIME_OUT = 10;
 
 
@@ -17,14 +22,6 @@ public class TestProducts extends BaseTestMultiThread {
     public Object[][] loginDataProvider() {
         return new Object[][]{
                 {"standard_user", "secret_sauce"}
-        };
-    }
-
-
-    @DataProvider(name = "titleDataProvider")
-    public Object[][] titleDataProvider() {
-        return new Object[][]{
-                {"standard_user", "secret_sauce", "PRODUCTS"}
         };
     }
 
@@ -40,15 +37,15 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "titleDataProvider", groups = {"product"})
-    public void testTitle(String username, String password, String title) {
+    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    public void testTitle(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
         SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
         productsPage.waitUntilLoaded();
-        Assert.assertEquals(productsPage.title(), title);
+        Assert.assertEquals(productsPage.title(), PRODUCTS_TITLE);
     }
 
 
@@ -121,6 +118,51 @@ public class TestProducts extends BaseTestMultiThread {
         for (var item : productsPage.inventoryList) {
         }
         Assert.assertEquals(productsPage.inventoryList.currentPrices, productsPage.inventoryList.pricesLotoHi());
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"sanity", "login", "product"})
+    public void testLogout(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        productsPage.logout();
+        login.waitUntilLoaded();
+        Assert.assertEquals(login.getCurrentUrl(), URL);
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    public void testAboutLink(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        productsPage.selectAbout();
+        Saucelabs saucelabs = new Saucelabs(this.getDriver(), TIME_OUT);
+        saucelabs.waitUntilLoaded();
+        Assert.assertEquals(saucelabs.getCurrentUrl(), SAUCE_URL);
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    public void testTwitterLink(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        productsPage.goToTwitter();
+        TwitterSaucelabs twitter = new TwitterSaucelabs(this.getDriver(), TIME_OUT);
+        twitter.waitUntilLoaded();
+        Assert.assertEquals(twitter.getCurrentUrl(), TWTTER_URL);
+        //System.out.println("Currently on: " + twitter.getCurrentUrl());
     }
 
 }

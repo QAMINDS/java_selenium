@@ -27,6 +27,7 @@ public class SauceProducts extends BasePage {
     public void waitUntilLoaded() {
         this.elements.getProductsTitle();
         this.elements.getSortDropdown();
+        this.elements.getBurgerButton();
     }
 
     public String title() {
@@ -39,4 +40,24 @@ public class SauceProducts extends BasePage {
         select.selectByValue(option.name().toLowerCase());
         logger.info("Sorting by: " + option.name());
     }
+
+    public void logout() {
+        logger.info("Logging out");
+        this.elements.getBurgerButton().click();
+        this.elements.getLogoutLink().click();
+    }
+
+    public void selectAbout() {
+        logger.info("Navigating to 'About'");
+        this.elements.getBurgerButton().click();
+        this.elements.getAboutLink().click();
+    }
+
+    public void goToTwitter() {
+        logger.info("Navigating to Twitter");
+        this.setCurrentTab();
+        this.elements.getTwitterLink().click();
+        this.switchToNewTab();
+    }
+
 }

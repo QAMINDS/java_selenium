@@ -1,5 +1,6 @@
 package common;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -9,6 +10,7 @@ public class BasePage {
     private WebDriver driver;
     private String url;
     private int timeout;
+    protected String currentTab;
     protected final Logger logger = Logger.getLogger(BasePage.class);
 
     public BasePage(WebDriver driver, int timeout) {
@@ -56,11 +58,17 @@ public class BasePage {
         return currentURL;
     }
 
+    public void setCurrentTab() {
+        String tempTab = this.driver.getWindowHandle();
+        this.currentTab = tempTab;
+        //System.out.println("Current tab: " + currentTab);
+    }
+
     public void switchToNewTab() {
-        String oldTab = this.driver.getWindowHandle();
         ArrayList<String> newTab = new ArrayList<>(this.driver.getWindowHandles());
-        newTab.remove(oldTab);
+        newTab.remove(currentTab);
         this.driver.switchTo().window(newTab.get(0));
+        //System.out.println("New tab: " + newTab.get(0));
     }
 
 }
