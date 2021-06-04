@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import saucelab.pages.SauceLogin;
+import saucelab.pages.SauceProducts;
 
 public class TestLogin extends BaseTestMultiThread {
 
@@ -37,8 +38,9 @@ public class TestLogin extends BaseTestMultiThread {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
-        login.login(username, password);
+        SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
         Assert.assertEquals(login.getCurrentUrl(), INVENTORY_URL);
         login.close();
     }

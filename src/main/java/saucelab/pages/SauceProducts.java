@@ -25,17 +25,18 @@ public class SauceProducts extends BasePage{
 
     @Override
     public void waitUntilLoaded() {
-        this.elements.getProductsHeader();
+        this.elements.getProductsTitle();
         this.elements.getSortDropdown();
     }
 
-    public String header (){
-        String header = this.elements.getProductsHeader().getText();
-        return header;
+    public String title (){
+        String title = this.elements.getProductsTitle().getText();
+        return title;
     }
 
     public void sort(SortOption option) {
         Select select = new Select(this.elements.getSortDropdown());
         select.selectByValue(option.name().toLowerCase());
+        System.out.println("Sorting by: " + option.name());
     }
 }

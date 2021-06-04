@@ -13,8 +13,8 @@ public class TestProducts extends BaseTestMultiThread {
 
     private static final int TIME_OUT = 10;
 
-    @DataProvider(name = "headerDataProvider")
-    public Object[][] headerDataProvider() {
+    @DataProvider(name = "titleDataProvider")
+    public Object[][] titleDataProvider() {
         return new Object[][]{
                 {"standard_user", "secret_sauce", "PRODUCTS"}
         };
@@ -30,26 +30,26 @@ public class TestProducts extends BaseTestMultiThread {
         };
     }
 
-    @Test(dataProvider = "headerDataProvider", groups = {"product"})
-    public void testHeader(String user, String password, String header) {
+    @Test(dataProvider = "titleDataProvider", groups = {"product"})
+    public void testTitle(String username, String password, String title) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
-        SauceProducts productPage = login.login(user, password);
+        SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
-        productPage.waitUntilLoaded();
-        Assert.assertEquals(productPage.header(), header);
+        productsPage.waitUntilLoaded();
+        Assert.assertEquals(productsPage.title(), title);
     }
 
 
     @Test(dataProvider = "sortDataProvider", groups = {"product"})
-    public void testSortProducts(String user, String password, SauceProducts.SortOption option) {
+    public void testSortProducts(String username, String password, SauceProducts.SortOption option) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
-        SauceProducts productPage = login.login(user, password);
+        SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
-        productPage.waitUntilLoaded();
-        productPage.sort(option);
+        productsPage.waitUntilLoaded();
+        productsPage.sort(option);
     }
 }

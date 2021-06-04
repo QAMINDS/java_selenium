@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class ProductsElements extends BaseElement{
 
-    private final static By PRODUCTS_HEADER = By.xpath("//*[@class='title' and contains(text(),'Products')]");
+    private final static By PRODUCTS_TITLE = By.xpath("//*[@class='title' and contains(text(),'Products')]");
 
     private final static By SORT_DROP = By.xpath("//*[@data-test='product_sort_container']");
 
@@ -15,8 +15,8 @@ public class ProductsElements extends BaseElement{
         super(driver, timeout);
     }
 
-    public WebElement getProductsHeader() {
-        return this.waitUntilVisible(PRODUCTS_HEADER);
+    public WebElement getProductsTitle() {
+        return this.waitUntilVisible(PRODUCTS_TITLE);
     }
 
     public WebElement getSortDropdown () {
