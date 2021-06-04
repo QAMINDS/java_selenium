@@ -3,6 +3,8 @@ package common;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+
 public class BasePage {
     private WebDriver driver;
     private String url;
@@ -16,7 +18,7 @@ public class BasePage {
     public BasePage(WebDriver driver, int timeout, String url) {
         this.driver = driver;
         this.url = url;
-        this.timeout =timeout;
+        this.timeout = timeout;
     }
 
     public void open() {
@@ -53,4 +55,12 @@ public class BasePage {
         String currentURL = this.driver.getCurrentUrl();
         return currentURL;
     }
+
+    public void switchToNewTab() {
+        String oldTab = this.driver.getWindowHandle();
+        ArrayList<String> newTab = new ArrayList<>(this.driver.getWindowHandles());
+        newTab.remove(oldTab);
+        this.driver.switchTo().window(newTab.get(0));
+    }
+
 }
