@@ -3,12 +3,12 @@ package saucelab.pages;
 import common.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
-//import saucelab.components.InventoryList;
+import saucelab.components.InventoryList;
 import saucelab.elements.ProductsElements;
 
 public class SauceProducts extends BasePage{
     public ProductsElements elements;
-    //public InventoryList inventoryList;
+    public InventoryList inventoryList;
 
     public enum SortOption {
         AZ,
@@ -20,7 +20,7 @@ public class SauceProducts extends BasePage{
     public SauceProducts(WebDriver driver, int timeout) {
         super(driver, timeout);
         elements = new ProductsElements(driver, timeout);
-        //inventoryList = new InventoryList(driver, timeout);
+        inventoryList = new InventoryList(driver, timeout);
     }
 
     @Override
