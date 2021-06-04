@@ -42,7 +42,15 @@ public class InventoryItem extends BasePage {
         return this.elements.getDescription().getText();
     }
 
-    public String getPrice() {
+
+    public String getPriceText() {
         return this.elements.getPrice().getText();
+    }
+
+    public float getPriceNumber() {
+        String priceText = this.elements.getPrice().getText();
+        priceText = priceText.replaceAll("[$]", "");
+        float i = Float.parseFloat(priceText);
+        return i;
     }
 }

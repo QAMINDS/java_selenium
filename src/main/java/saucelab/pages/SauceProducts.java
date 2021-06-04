@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import saucelab.components.InventoryList;
 import saucelab.elements.ProductsElements;
 
-public class SauceProducts extends BasePage{
+public class SauceProducts extends BasePage {
     public ProductsElements elements;
     public InventoryList inventoryList;
 
@@ -29,7 +29,7 @@ public class SauceProducts extends BasePage{
         this.elements.getSortDropdown();
     }
 
-    public String title (){
+    public String title() {
         String title = this.elements.getProductsTitle().getText();
         return title;
     }
@@ -37,6 +37,6 @@ public class SauceProducts extends BasePage{
     public void sort(SortOption option) {
         Select select = new Select(this.elements.getSortDropdown());
         select.selectByValue(option.name().toLowerCase());
-        System.out.println("Sorting by: " + option.name());
+        logger.info("Sorting by: " + option.name());
     }
 }
