@@ -2,13 +2,10 @@ package saucelab.components;
 
 import common.BasePage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import saucelab.elements.InventoryListElements;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Collections;
+import java.util.*;
 
 public class InventoryList extends BasePage implements Iterable<InventoryItem> {
     private List<InventoryItem> items;
@@ -17,6 +14,8 @@ public class InventoryList extends BasePage implements Iterable<InventoryItem> {
     private List<Float> itemPrices;
     public String[] currentNames;
     public Float[] currentPrices;
+    public int totalItems;
+    public int random;
 
 
     public InventoryList(WebDriver driver, int timeout) {
@@ -33,12 +32,21 @@ public class InventoryList extends BasePage implements Iterable<InventoryItem> {
         return this.items.iterator();
     }
 
+    public InventoryItem randomItem() {
+        this.refreshResult();
+        Random rand = new Random();
+        random = rand.nextInt(totalItems);
+        return this.items.get(random);
+    }
+
+
     private void refreshResult() {
         this.items.clear();
         for (var element : this.elements.getItems()) {
             this.items.add(new InventoryItem(this.getDriver(), this.getTimeout(), element));
             this.itemNames.add(new InventoryItem(this.getDriver(), this.getTimeout(), element).getName());
             this.itemPrices.add(new InventoryItem(this.getDriver(), this.getTimeout(), element).getPriceNumber());
+            totalItems = items.size();
         }
 
         currentNames = new String[itemNames.size()];

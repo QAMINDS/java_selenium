@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class ProductsElements extends BaseElement{
 
     private final static By PRODUCTS_TITLE = By.xpath("//*[@class='title' and contains(text(),'Products')]");
@@ -18,6 +20,8 @@ public class ProductsElements extends BaseElement{
     private final static By LOGOUT_LINK = By.id("logout_sidebar_link");
 
     private final static By TWITTER_LINK = By.xpath("//a[@href='https://twitter.com/saucelabs']");
+
+    private final static By CART_BAGDE = By.xpath("//span[@class='shopping_cart_badge']");
 
 
     public ProductsElements(WebDriver driver, int timeout) {
@@ -48,4 +52,9 @@ public class ProductsElements extends BaseElement{
         return this.waitUntilClickable(TWITTER_LINK);
     }
 
+    public List<WebElement> getCartBagde() {
+        return this.dontWaitForElements(CART_BAGDE);
+    }
+
 }
+

@@ -41,6 +41,10 @@ public class BaseElement {
         return this.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
+    public List<WebElement> dontWaitForElements(By locator) {
+        return this.driver.findElements(locator);
+    }
+
     public WebElement getRootElement() {
         return this.wait.until(ExpectedConditions.visibilityOf(this.rootElement));
     }

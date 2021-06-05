@@ -18,19 +18,22 @@ public class InventoryItem extends BasePage {
 
     public void addToCart() {
         if (!this.isInCart()) {
+            logger.info("Is in cart? " + isInCart());
             this.elements.getButton().click();
+            logger.info("Adding to Cart");
         }
     }
 
     public void removeFromCart() {
         if (this.isInCart()) {
+            logger.info("Is in cart? " + isInCart());
             this.elements.getButton().click();
+            logger.info("Removing from Cart");
         }
     }
 
     public Boolean isInCart() {
         return (this.elements.getButton().getText().toLowerCase().equals(REMOVE_LABEL));
-
     }
 
     public String getName() {

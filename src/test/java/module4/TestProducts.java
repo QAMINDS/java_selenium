@@ -4,6 +4,7 @@ import common.BaseTestMultiThread;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import saucelab.components.InventoryItem;
 import saucelab.pages.SauceLogin;
 import saucelab.pages.SauceProducts;
 import saucelab.pages.Saucelabs;
@@ -15,6 +16,7 @@ public class TestProducts extends BaseTestMultiThread {
     private static final String SAUCE_URL = "https://saucelabs.com/";
     private static final String TWTTER_URL = "https://twitter.com/saucelabs";
     private static final String PRODUCTS_TITLE = "PRODUCTS";
+    private static final int INITIAL_BADGE = 0;
     private static final int TIME_OUT = 10;
 
 
@@ -49,7 +51,7 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(enabled=false, dataProvider = "sortDataProvider", groups = {"product"})
+    @Test(enabled = false, dataProvider = "sortDataProvider", groups = {"product"})
     public void testSortProducts(String username, String password, SauceProducts.SortOption option) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
@@ -121,7 +123,7 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"sanity", "login", "product"})
+    @Test(dataProvider = "loginDataProvider", groups = {"sanity", "login"})
     public void testLogout(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
@@ -135,7 +137,7 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    @Test(dataProvider = "loginDataProvider", groups = {"sanity"})
     public void testAboutLink(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
@@ -150,7 +152,7 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    @Test(dataProvider = "loginDataProvider", groups = {"sanity"})
     public void testTwitterLink(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
@@ -163,6 +165,36 @@ public class TestProducts extends BaseTestMultiThread {
         twitter.waitUntilLoaded();
         Assert.assertEquals(twitter.getCurrentUrl(), TWTTER_URL);
         //System.out.println("Currently on: " + twitter.getCurrentUrl());
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    public void testBadgeInitial(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        Assert.assertEquals(productsPage.badgeNumber(), INITIAL_BADGE);
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    public void testRandomAddRemove(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        InventoryItem item = productsPage.inventoryList.randomItem();
+        item.addToCart();
+        Assert.assertTrue(item.isInCart());
+        Assert.assertEquals(productsPage.badgeNumber(), INITIAL_BADGE + 1);
+        item.removeFromCart();
+        Assert.assertFalse(item.isInCart());
+        Assert.assertEquals(productsPage.badgeNumber(), INITIAL_BADGE);
     }
 
 }

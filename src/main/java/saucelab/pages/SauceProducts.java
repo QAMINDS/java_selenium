@@ -1,14 +1,20 @@
 package saucelab.pages;
 
 import common.BasePage;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import saucelab.components.InventoryList;
 import saucelab.elements.ProductsElements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SauceProducts extends BasePage {
     public ProductsElements elements;
     public InventoryList inventoryList;
+    private int i;
 
     public enum SortOption {
         AZ,
@@ -31,6 +37,7 @@ public class SauceProducts extends BasePage {
     }
 
     public String title() {
+        logger.info("Checking page title");
         String title = this.elements.getProductsTitle().getText();
         return title;
     }
@@ -58,6 +65,21 @@ public class SauceProducts extends BasePage {
         this.setCurrentTab();
         this.elements.getTwitterLink().click();
         this.switchToNewTab();
+    }
+
+    public int badgeNumber() {
+        logger.info("Checking cart badge");
+        List<WebElement> badges = new ArrayList<>(this.elements.getCartBagde());
+
+        if (badges.size() == 0) {
+            i = 0;
+            logger.info("Cart badge is not present");
+        } else {
+            String badgeText = badges.get(0).getText();
+            i = Integer.parseInt(badgeText);
+            logger.info("Cart badge number is: " + i);
+        }
+        return i;
     }
 
 }
