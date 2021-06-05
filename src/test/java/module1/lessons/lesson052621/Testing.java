@@ -23,5 +23,13 @@ public class Testing extends BaseTestMultiThread {
         Assert.assertTrue(true);
 
         this.getDriver().close();
+
+
+    }
+
+    public Object[][] valid() {
+        return new Object [] [] {
+                { "standard_user", "secret_sauce"}
+        };
     }
 }
