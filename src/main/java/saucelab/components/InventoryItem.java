@@ -18,17 +18,15 @@ public class InventoryItem extends BasePage {
 
     public void addToCart() {
         if (!this.isInCart()) {
-            logger.info("Is in cart? " + isInCart());
             this.elements.getButton().click();
-            logger.info("Adding to Cart");
+            logger.info("Adding product to Cart");
         }
     }
 
     public void removeFromCart() {
         if (this.isInCart()) {
-            logger.info("Is in cart? " + isInCart());
             this.elements.getButton().click();
-            logger.info("Removing from Cart");
+            logger.info("Removing product from Cart");
         }
     }
 

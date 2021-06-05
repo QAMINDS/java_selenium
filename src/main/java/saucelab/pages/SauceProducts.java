@@ -68,7 +68,6 @@ public class SauceProducts extends BasePage {
     }
 
     public int badgeNumber() {
-        logger.info("Checking cart badge");
         List<WebElement> badges = new ArrayList<>(this.elements.getCartBagde());
 
         if (badges.size() == 0) {
