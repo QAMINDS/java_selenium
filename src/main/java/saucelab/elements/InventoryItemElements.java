@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class InventoryItemElements extends BaseElement {
 
     private final static By NAME= By.xpath(".//*[@class='inventory_item_name']");
@@ -19,8 +21,12 @@ public class InventoryItemElements extends BaseElement {
         super(driver, timeout, rootElement);
     }
 
+    public InventoryItemElements(WebDriver driver, int timeout) {
+        super(driver, timeout);
+    }
+
     public WebElement getName() {
-        return this.waitUntilSubElementVisible(NAME);
+        return this.waitUntilSubElementClickable(NAME);
     }
 
     public WebElement getDescription() {
@@ -33,5 +39,9 @@ public class InventoryItemElements extends BaseElement {
 
     public WebElement getButton() {
         return this.waitUntilSubElementClickable(BUTTON);
+    }
+
+    public List<WebElement> getLink() {
+        return this.waitForElements(NAME);
     }
 }

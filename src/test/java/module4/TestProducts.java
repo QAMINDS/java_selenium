@@ -17,7 +17,7 @@ public class TestProducts extends BaseTestMultiThread {
     private static final String TWTTER_URL = "https://twitter.com/saucelabs";
     private static final String PRODUCTS_TITLE = "PRODUCTS";
     private static final int INITIAL_BADGE = 0;
-    private static int CURRENT_BADGE;
+    private static int currentBadge;
     private static final int TIME_OUT = 10;
 
 
@@ -207,11 +207,11 @@ public class TestProducts extends BaseTestMultiThread {
         SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
         productsPage.waitUntilLoaded();
-        CURRENT_BADGE = INITIAL_BADGE;
+        currentBadge = INITIAL_BADGE;
         for (var item : productsPage.inventoryList) {
             item.addToCart();
-            CURRENT_BADGE++;
-            Assert.assertEquals(productsPage.badgeNumber(), CURRENT_BADGE);
+            currentBadge++;
+            Assert.assertEquals(productsPage.badgeNumber(), currentBadge);
         }
     }
 
