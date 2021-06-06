@@ -44,4 +44,8 @@ public class InventoryItemElements extends BaseElement {
     public List<WebElement> getLink() {
         return this.waitForElements(NAME);
     }
+
+    public List<WebElement> getAllButtons() {
+        return this.waitForElements(BUTTON);
+    }
 }

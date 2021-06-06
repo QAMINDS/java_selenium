@@ -4,6 +4,8 @@
         <classes>
             <class name="module4.TestLogin"/>
             <class name="module4.TestProducts"/>
+            <class name="module4.TestYourCart"/>
+            <class name="module4.TestProductDetails"/>
         </classes>
     </test>
 </suite>

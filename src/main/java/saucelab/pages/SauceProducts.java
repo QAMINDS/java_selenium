@@ -81,4 +81,9 @@ public class SauceProducts extends BasePage {
         return i;
     }
 
+    public void goToCart() {
+        logger.info("Navigating to Cart");
+        this.elements.getCartLink().click();
+    }
+
 }

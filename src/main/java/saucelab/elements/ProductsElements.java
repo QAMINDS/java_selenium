@@ -23,6 +23,8 @@ public class ProductsElements extends BaseElement{
 
     private final static By CART_BAGDE = By.xpath("//span[@class='shopping_cart_badge']");
 
+    private final static By CART_LINK = By.className("shopping_cart_link");
+
 
     public ProductsElements(WebDriver driver, int timeout) {
         super(driver, timeout);
@@ -56,5 +58,8 @@ public class ProductsElements extends BaseElement{
         return this.dontWaitForElements(CART_BAGDE);
     }
 
-}
+    public WebElement getCartLink () {
+        return this.waitUntilClickable(CART_LINK);
+    }
 
+}

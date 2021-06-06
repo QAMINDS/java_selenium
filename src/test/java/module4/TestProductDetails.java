@@ -20,13 +20,7 @@ public class TestProductDetails extends BaseTestMultiThread {
     private static final String PROD_DETAILS_URL = "https:\\/\\/www\\.saucedemo\\.com\\/inventory-item\\.html\\?id=[0-9]";
     private static final int TIME_OUT = 10;
     private static final int INITIAL_PROD_BADGE = 0;
-    private static int currentProdBadge;
-    private static String currentProduct;
-
-    public InventoryItemElements elements;
-    public ProductDetails detailsPage;
-    public SauceLogin login;
-    public SauceProducts productsPage;
+    //private static String currentProduct;
 
 
     @DataProvider(name = "loginDataProvider")
@@ -39,22 +33,24 @@ public class TestProductDetails extends BaseTestMultiThread {
 
     @Test(dataProvider = "loginDataProvider", groups = {"product"})
     public void testProductNavigation(String username, String password) {
-        login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
-        productsPage = login.login(username, password);
+        SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
         productsPage.waitUntilLoaded();
-        elements = new InventoryItemElements(this.getDriver(), TIME_OUT);
-        detailsPage = new ProductDetails(this.getDriver(), TIME_OUT);
+        InventoryItemElements elements = new InventoryItemElements(this.getDriver(), TIME_OUT);
+        ProductDetails detailsPage = new ProductDetails(this.getDriver(), TIME_OUT);
 
-        List<WebElement> links = new ArrayList<>(this.elements.getLink());
+        List<WebElement> links = new ArrayList<>(elements.getLink());
         int size = links.size();
 
+        String currentProduct;
+
         for (int i = 0; i < size; i++) {
-            List<WebElement> linksLoop = new ArrayList<>(this.elements.getLink());
+            List<WebElement> linksLoop = new ArrayList<>(elements.getLink());
             currentProduct = linksLoop.get(i).getText();
-            //System.out.println("value of currentProduct = " + currentProduct);
+            System.out.println("value of currentProduct = " + currentProduct);
             linksLoop.get(i).click();
             detailsPage.waitUntilLoaded();
             Assert.assertTrue(detailsPage.getCurrentUrl().matches(PROD_DETAILS_URL));
@@ -68,20 +64,22 @@ public class TestProductDetails extends BaseTestMultiThread {
 
     @Test(dataProvider = "loginDataProvider", groups = {"product"})
     public void testAddRemove(String username, String password) {
-        login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
         login.waitUntilLoaded();
-        productsPage = login.login(username, password);
+        SauceProducts productsPage = login.login(username, password);
         Assert.assertTrue(login.isValidUser());
         productsPage.waitUntilLoaded();
-        elements = new InventoryItemElements(this.getDriver(), TIME_OUT);
-        detailsPage = new ProductDetails(this.getDriver(), TIME_OUT);
+        InventoryItemElements elements = new InventoryItemElements(this.getDriver(), TIME_OUT);
+        ProductDetails detailsPage = new ProductDetails(this.getDriver(), TIME_OUT);
 
-        List<WebElement> links = new ArrayList<>(this.elements.getLink());
+        List<WebElement> links = new ArrayList<>(elements.getLink());
         int size = links.size();
 
+        String currentProduct;
+
         for (int i = 0; i < size; i++) {
-            List<WebElement> linksLoop = new ArrayList<>(this.elements.getLink());
+            List<WebElement> linksLoop = new ArrayList<>(elements.getLink());
             currentProduct = linksLoop.get(i).getText();
             linksLoop.get(i).click();
             detailsPage.waitUntilLoaded();
