@@ -11,6 +11,7 @@ import saucelabs.pages.Product;
 
 import java.util.List;
 
+
 public class TestProduct extends BaseTestMultiThread {
     private static final String URL = "https://www.saucedemo.com/";
 
@@ -27,19 +28,9 @@ public class TestProduct extends BaseTestMultiThread {
         productPage.sort(Product.SortOption.AZ);
 
         // Interact with product
-//        for(var item: productPage.inventoryList) {
-//            System.out.println("--------------------");
-//            System.out.println(item.getTitle());
-//            System.out.println(item.getDescription());
-//            System.out.println(item.getPrice());
-//            item.addToCart();
-//        }
-
-
-        List<WebElement> items = productPage.inventoryList.getItems();
-        for (int t=0; t<items.size(); t++) {
+        for(var item: productPage.inventoryList) {
             System.out.println("--------------------");
-            System.out.println(items.get(t).);
+            System.out.println(item.getTitle());
             System.out.println(item.getDescription());
             System.out.println(item.getPrice());
             item.addToCart();
