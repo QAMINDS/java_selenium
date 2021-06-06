@@ -28,6 +28,13 @@ public class ProductDetails extends BasePage {
         return prodName;
     }
 
+    public String prodPrice() {
+        logger.info("Checking product price in details page");
+        String prodPrice = this.elements.getProdPrice().getText();
+        logger.info("Product price is :" + prodPrice);
+        return prodPrice;
+    }
+
     public Boolean isProdInCart() {
         return (this.elements.getProdButton().getText().toLowerCase().equals(REMOVE_LABEL));
     }

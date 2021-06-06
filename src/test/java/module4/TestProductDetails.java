@@ -31,7 +31,7 @@ public class TestProductDetails extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    @Test(dataProvider = "loginDataProvider", groups = {"productDetails"})
     public void testProductNavigation(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();
@@ -62,7 +62,42 @@ public class TestProductDetails extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"product"})
+    @Test(dataProvider = "loginDataProvider", groups = {"productDetails"})
+    public void testProductPrice(String username, String password) {
+        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
+        login.open();
+        login.waitUntilLoaded();
+        SauceProducts productsPage = login.login(username, password);
+        Assert.assertTrue(login.isValidUser());
+        productsPage.waitUntilLoaded();
+        InventoryItemElements elements = new InventoryItemElements(this.getDriver(), TIME_OUT);
+        ProductDetails detailsPage = new ProductDetails(this.getDriver(), TIME_OUT);
+
+        List<WebElement> links = new ArrayList<>(elements.getLink());
+        int size = links.size();
+
+        String currentProduct;
+        String currentPrice;
+
+        for (int i = 0; i < size; i++) {
+            List<WebElement> linksLoop = new ArrayList<>(elements.getLink());
+            List<WebElement> prices = new ArrayList<>(elements.getAllPrices());
+            currentProduct = linksLoop.get(i).getText();
+            currentPrice = prices.get(i).getText();
+            System.out.println("value of currentProduct = " + currentProduct);
+            System.out.println("value of currentProduct = " + currentPrice);
+            linksLoop.get(i).click();
+            detailsPage.waitUntilLoaded();
+            Assert.assertTrue(detailsPage.getCurrentUrl().matches(PROD_DETAILS_URL));
+            Assert.assertEquals(detailsPage.prodName(), currentProduct);
+            Assert.assertEquals(detailsPage.prodPrice(), currentPrice);
+            detailsPage.returnToProducs();
+            productsPage.waitUntilLoaded();
+        }
+    }
+
+
+    @Test(dataProvider = "loginDataProvider", groups = {"productDetails"})
     public void testAddRemove(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
         login.open();

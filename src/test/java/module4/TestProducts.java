@@ -124,20 +124,6 @@ public class TestProducts extends BaseTestMultiThread {
     }
 
 
-    @Test(dataProvider = "loginDataProvider", groups = {"sanity", "login"})
-    public void testLogout(String username, String password) {
-        SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);
-        login.open();
-        login.waitUntilLoaded();
-        SauceProducts productsPage = login.login(username, password);
-        Assert.assertTrue(login.isValidUser());
-        productsPage.waitUntilLoaded();
-        productsPage.logout();
-        login.waitUntilLoaded();
-        Assert.assertEquals(login.getCurrentUrl(), URL);
-    }
-
-
     @Test(dataProvider = "loginDataProvider", groups = {"sanity"})
     public void testAboutLink(String username, String password) {
         SauceLogin login = new SauceLogin(this.getDriver(), TIME_OUT, URL);

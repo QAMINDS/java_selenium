@@ -11,6 +11,8 @@ public class ProdDetailsElements extends BaseElement {
 
     private final static By PROD_NAME = By.xpath("//div[@class='inventory_details_name large_size']");
 
+    private final static By PROD_PRICE = By.className("inventory_details_price");
+
     private final static By PROD_BUTTON = By.xpath("//button[contains(@class, 'btn_inventory')]");
 
     public ProdDetailsElements(WebDriver driver, int timeout) {
@@ -23,6 +25,10 @@ public class ProdDetailsElements extends BaseElement {
 
     public WebElement getProdName() {
         return this.waitUntilVisible(PROD_NAME);
+    }
+
+    public WebElement getProdPrice() {
+        return this.waitUntilVisible(PROD_PRICE);
     }
 
     public WebElement getProdButton() {

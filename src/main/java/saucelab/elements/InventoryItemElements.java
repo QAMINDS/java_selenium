@@ -37,6 +37,10 @@ public class InventoryItemElements extends BaseElement {
         return this.waitUntilSubElementVisible(PRICE);
     }
 
+    public List <WebElement> getAllPrices() {
+        return this.waitForElements(PRICE);
+    }
+
     public WebElement getButton() {
         return this.waitUntilSubElementClickable(BUTTON);
     }
