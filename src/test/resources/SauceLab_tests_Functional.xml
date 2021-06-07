@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceLab suite1" verbose="1" parallel="methods" thread-count="10">
+    <groups>
+        <run>
+            <include name="functional"></include>
+        </run>
+    </groups>
+    <test name="Functional">
+        <classes>
+            <class name="module4.TestLogin"></class>
+            <class name="module4.TestProduct"></class>
+            <class name="module4.TestProductDetails"></class>
+        </classes>
+    </test>
+</suite>
