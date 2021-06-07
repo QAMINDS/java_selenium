@@ -22,12 +22,17 @@ public class Saucelad extends BasePage {
             this.elements.getPass();
             this.elements.getBtnLogin();
         }
-        public void login(String user, String pass){
+        public Product login(String user, String pass){
             this.elements.getUser().sendKeys(user);
             this.elements.getPass().sendKeys(pass);
             this.elements.getBtnLogin().click();
+            return new Product(this.getDriver(),this.getTimeout());
 
         }
+        public void loginVacio(){
+            this.elements.getBtnLogin().click();
+        }
+
 
         public boolean IsValidUser(){
             return(this.elements.getErrorMsg() == null);
