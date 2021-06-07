@@ -4,7 +4,7 @@ import common.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import saucelabs.elements.InventoryItemElements;
-//import saucelab.elements.InventoryItemElements;
+import saucelabs.pages.InventoryItemPage;
 
 public class InventoryItem extends BasePage {
     private static String ADD_LABEL = "add to cart";
@@ -45,5 +45,14 @@ public class InventoryItem extends BasePage {
 
     public String getPrice() {
         return this.elements.getPrice().getText();
+    }
+
+    public WebElement getPicture() {
+        return this.elements.getPicture();
+    }
+
+    public InventoryItemPage clickOnPicture() {
+        getPicture().click();
+        return new InventoryItemPage(this.getDriver(), this.getTimeout());
     }
 }

@@ -54,7 +54,7 @@ class SaucelabsPageTest: BaseTestMultiThread(){
         saucelabsPage.waitUntilLoaded()
         val productPage = saucelabsPage.loginAndGoToProducts(username, password)
         productPage.waitUntilLoaded()
-        productPage.sortAtoZ()
+//        productPage.sortAtoZ()
         Thread.sleep(2000)
         saucelabsPage.close()
     }

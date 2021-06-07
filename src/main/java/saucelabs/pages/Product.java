@@ -4,11 +4,7 @@ import common.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import saucelabs.components.InventoryList;
-import saucelabs.elements.InventoryListElements;
 import saucelabs.elements.ProductElements;
-import saucelabs.elements.ProductElementsKotlin;
-//import saucelab.components.InventoryList;
-//import saucelab.elements.ProductElements;
 
 public class Product extends BasePage {
     public ProductElements elements;

@@ -27,6 +27,4 @@ class ProductElementsKotlin(driver: WebDriver, timeout: Int): BaseElement(driver
     fun sortAtoZ(): WebElement? {
         return this.waitForElements(SORTING_OPTIONS).firstOrNull()
     }
-
-
 }

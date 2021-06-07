@@ -15,6 +15,9 @@ public class InventoryItemElements extends BaseElement {
 
     private final static By BUTTON = By.xpath(".//*[contains(@class, 'btn_inventory')]");
 
+    private final static By PICTURE = By.xpath(".//img[contains(@class, 'inventory_item_img')]");
+
+
     public InventoryItemElements(WebDriver driver, int timeout, WebElement rootElement) {
         super(driver, timeout, rootElement);
     }
@@ -33,5 +36,9 @@ public class InventoryItemElements extends BaseElement {
 
     public WebElement getButton() {
         return this.waitUntilSubElementClickable(BUTTON);
+    }
+
+    public WebElement getPicture() {
+        return this.waitUntilSubElementClickable(PICTURE);
     }
 }

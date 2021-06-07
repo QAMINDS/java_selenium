@@ -24,11 +24,11 @@ class SaucelabsKotlin(driver: WebDriver?, timeout: Int, url: String?) : BasePage
         clickLoginButton()
     }
 
-    fun loginAndGoToProducts(username: String, password: String): ProductPage {
+    fun loginAndGoToProducts(username: String, password: String): Product {
         enterUsername(username)
         enterPassword(password)
         clickLoginButton()
-        return ProductPage(driver, 5, url)
+        return Product(driver, 5)
     }
 
     fun enterUsername(username: String) {

@@ -3,8 +3,6 @@ package saucelabs.pages;
 import common.BasePage;
 import org.openqa.selenium.WebDriver;
 import saucelabs.elements.LoginElements;
-//import org.openqa.selenium.WebElement;
-//import saucelab.elements.LoginElements;
 
 public class Login extends BasePage {
     public LoginElements elements;

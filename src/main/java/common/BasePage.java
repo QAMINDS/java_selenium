@@ -51,4 +51,9 @@ public class BasePage {
     public int getTimeout() {
         return timeout;
     }
+
+    public void navigateToPreviousPage() {
+        driver.navigate().back();
+    }
+
 }
