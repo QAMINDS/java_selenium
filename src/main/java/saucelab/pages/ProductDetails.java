@@ -18,4 +18,5 @@ public class ProductDetails extends BasePage {
         this.elements.getAddToCart();
         this.elements.getProductName();
     }
+
 }

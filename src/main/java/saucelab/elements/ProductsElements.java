@@ -17,6 +17,9 @@ public class ProductsElements extends BaseElement {
 
     private final static By CART = By.id("shopping_cart_link");
 
+    private final static By ITEM = By.xpath("//div[normalize-space()='Sauce Labs Backpack']");
+
+
 
     public ProductsElements(WebDriver driver, int timeout) {
         super(driver, timeout);
@@ -39,5 +42,7 @@ public class ProductsElements extends BaseElement {
     }
 
     public  WebElement getCart() { return  this.waitUntilClickable(CART); }
+
+    public  WebElement getItem() { return  this.waitUntilClickable(ITEM); }
 
 }

@@ -19,6 +19,29 @@ public class TestProducts extends BaseTestMultiThread{
         };
     }
 
+    @DataProvider(name = "sortDataProvider")
+    public Object[][] sortDataProvider() {
+        return new Object[][]{
+                {"standard_user", "secret_sauce", Products.SortOption.HILO},
+                {"standard_user", "secret_sauce", Products.SortOption.AZ},
+                {"standard_user", "secret_sauce", Products.SortOption.ZA},
+                {"standard_user", "secret_sauce", Products.SortOption.LOHI},
+        };
+    }
+
+    @Test (description = "Sort By price" , groups = {"functional", "regression"})
+    public void testAmountItemsByPrice(){
+        Login loginPage = new Login(this.getDriver(), TIME_OUT, URL);
+        loginPage.open();
+        loginPage.waitUntilLoaded();
+        Products productPage = loginPage.login("standard_user", "secret_sauce");
+        Assert.assertTrue(loginPage.isValidUser());
+        productPage.waitUntilLoaded();
+        productPage.sort(Products.SortOption.LOHI);
+        Assert.assertTrue(productPage.getItem());
+
+    }
+
     @Test(dataProvider = "validUserDataProvider")
     public void testValidUser(String user, String password){
         Login login = new Login(this.getDriver(),TIME_OUT,URL);
@@ -28,6 +51,16 @@ public class TestProducts extends BaseTestMultiThread{
         products.waitUntilLoaded();
         Assert.assertEquals(products.title(),"PRODUCTS");
         login.close();
+    }
+
+    @Test(dataProvider = "validUserDataProvider")
+    public void testMenu(String user, String password){
+        Login login = new Login(this.getDriver(),TIME_OUT,URL);
+        login.open();
+        login.waitUntilLoaded();
+        Products products = login.login("standard_user","secret_sauce");
+        products.waitUntilLoaded();
+        products.menu();
     }
 
 }
