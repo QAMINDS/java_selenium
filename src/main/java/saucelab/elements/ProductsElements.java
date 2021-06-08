@@ -11,6 +11,13 @@ public class ProductsElements extends BaseElement {
 
     private  final static  By FILTER = By.xpath("//*[@data-test='product_sort_container']");
 
+    private  final static  By MENU = By.id("react-burger-menu-btn");
+
+    private  final static  By ALL_ITEMS = By.id("inventory_sidebar_link");
+
+    private final static By CART = By.id("shopping_cart_link");
+
+
     public ProductsElements(WebDriver driver, int timeout) {
         super(driver, timeout);
     }
@@ -22,5 +29,15 @@ public class ProductsElements extends BaseElement {
     public WebElement getFilter() {
         return this.waitUntilClickable(FILTER);
     }
+
+    public WebElement getMenu() {
+        return this.waitUntilClickable(MENU);
+    }
+
+    public WebElement getAllItems() {
+        return this.waitUntilClickable(ALL_ITEMS);
+    }
+
+    public  WebElement getCart() { return  this.waitUntilClickable(CART); }
 
 }

@@ -30,5 +30,5 @@ public class LoginElements extends BaseElement {
         return this.waitUntilClickable(LOGIN_BTN);
     }
 
-    public WebElement getErrorMsg(){ return  this.waitUntilClickable(MSG_ERROR);}
+    public WebElement getErrorMsg(){ return  this.waitUntilVisible(MSG_ERROR);}
 }
