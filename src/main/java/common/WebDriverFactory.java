@@ -37,6 +37,7 @@ public class WebDriverFactory {
         String os = System.getProperty("os.name");
         File osDriversDir = null;
         logger.debug("Operating system: " + os);
+        System.out.println("Operating system: " + os);
         logger.debug("Drivers root directory: " + rootDriversDir.toString());
         if (os.toLowerCase().contains("windows")) {
             osDriversDir = new File(rootDriversDir, "windows");

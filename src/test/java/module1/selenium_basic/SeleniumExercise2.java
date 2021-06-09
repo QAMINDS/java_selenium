@@ -19,9 +19,6 @@ public class SeleniumExercise2 {
        int function=0, script=0,numClass=0, id=0;
 
         String[] words = pageSource.split("\\s+");
-
-
-
         System.out.println("class "+numClass);
         System.out.println("function "+function);
         System.out.println("script "+script);
